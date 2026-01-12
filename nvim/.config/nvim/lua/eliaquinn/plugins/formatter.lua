@@ -20,6 +20,7 @@ return {
 				-- liquid = { "prettier" },
 				-- lua = { "stylua" },
 				python = { "isort", "black" },
+				php = { "phpcsfixer", "php" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

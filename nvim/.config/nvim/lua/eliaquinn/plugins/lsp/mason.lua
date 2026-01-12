@@ -42,6 +42,7 @@ return {
 				"eslint",
 				-- "taplo",
 				"yamlls",
+				"intelephense",
 			},
 			automatic_installation = true,
 		})
@@ -57,6 +58,7 @@ return {
 					"pylint", -- python linter
 					"eslint_d", -- js linter
 					"docformatter",
+					"duster",
 				},
 				auto_update = false, -- adicionar esta opção
 				run_on_start = true,
