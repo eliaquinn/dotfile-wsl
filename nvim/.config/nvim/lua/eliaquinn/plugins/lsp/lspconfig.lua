@@ -1,136 +1,97 @@
 return {
-	"neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/nvim-cmp",
-		"antosha417/nvim-lsp-file-operations",
-		{ "folke/neodev.nvim", opts = {} },
-		{
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
-		"williamboman/mason-lspconfig.nvim",
-	},
-	config = function()
-		-- Verificar se a nova API está disponível
-		local use_new_api = vim.fn.has("nvim-0.11") == 1
+  "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "hrsh7th/cmp-nvim-lsp",
+  },
+  config = function()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-		if use_new_api then
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.HINT] = "󰰀",
+          [vim.diagnostic.severity.INFO] = "",
+        },
+      },
+    })
 
-			-- Função on_attach para configurar mapeamentos locais
-			local on_attach = function(_, bufnr)
-				local opts = { noremap = true, silent = true, buffer = bufnr }
+    local on_attach = function(_, bufnr)
+      local opts = { noremap = true, silent = true, buffer = bufnr }
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    end
 
-				vim.keymap.set("n", "<leader>lwl", function()
-					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-				end, opts)
-			end
+    if vim.fn.has("nvim-0.11") == 1 then
+      vim.lsp.config.ts_ls = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
 
-			-- Configuração de diagnósticos
-			vim.diagnostic.config({
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = "",
-						[vim.diagnostic.severity.WARN] = "",
-						[vim.diagnostic.severity.HINT] = "󰰀",
-						[vim.diagnostic.severity.INFO] = "",
-					},
-				},
-			})
+      vim.lsp.config.pyright = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
 
-			vim.schedule(function()
-				-- Terraform LSP
-				vim.lsp.config.terraformls = {
-					cmd = { "terraform-ls", "serve" },
-					filetypes = { "terraform", "terraform-vars" },
-					root_markers = { ".terraform", "*.tf", ".git" },
-					capabilities = capabilities,
-					on_attach = on_attach,
-				}
+      vim.lsp.config.lua_ls = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace",
+            },
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+              checkThirdParty = false,
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = { enable = false },
+          },
+        },
+      }
 
-				-- ESLint LSP (diagnósticos + fix)
-				vim.lsp.config.eslint = {
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						on_attach(client, bufnr)
+      -- ESLint LSP (diagnósticos + fix)
+      vim.lsp.config.eslint = {
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
 
-						-- auto-fix ao salvar (se o server suportar)
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = bufnr,
-							callback = function()
-								-- tenta aplicar "fix all" do eslint quando disponível
-								pcall(vim.cmd, "EslintFixAll")
-							end,
-						})
-					end,
-				}
+          -- auto-fix ao salvar (se o server suportar)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              -- tenta aplicar "fix all" do eslint quando disponível
+              pcall(vim.cmd, "EslintFixAll")
+            end,
+          })
+        end,
+      }
 
-				-- Lua LSP
-				vim.lsp.config.lua_ls = {
-					cmd = { "lua-language-server" },
-					filetypes = { "lua" },
-					root_markers = {
-						".luarc.json",
-						".luarc.jsonc",
-						".luacheckrc",
-						".stylua.toml",
-						"stylua.toml",
-						"selene.toml",
-						"selene.yml",
-						".git",
-					},
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = {
-						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-							workspace = {
-								library = vim.api.nvim_get_runtime_file("", true),
-								checkThirdParty = false,
-							},
-							telemetry = {
-								enable = false,
-							},
-						},
-					},
-				}
+      -- inicia aqui o lsp
+      vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls" })
 
-				vim.lsp.config.ts_ls = {
-					capabilities = capabilities,
-					on_attach = on_attach,
-				}
+      return
+    end
 
-				vim.lsp.config.pyright = {
-					capabilities = capabilities,
-					on_attach = on_attach,
-				}
+    -- Fallback para versões antigas (<0.11), se você quiser manter compatibilidade:
+    local lspconfig = require("lspconfig")
 
-				-- Dart LSP
-				-- vim.lsp.config.dartls = {
-				-- 	cmd = { "dart", "language-server", "--protocol=lsp" },
-				-- 	filetypes = { "dart" },
-				-- 	root_markers = { "pubspec.yaml", ".git" },
-				-- 	capabilities = capabilities,
-				-- 	on_attach = on_attach,
-				-- 	settings = {
-				-- 		dart = {
-				-- 			completeFunctionCalls = true,
-				-- 			showTodos = true,
-				-- 		},
-				-- 	},
-				-- }
+    lspconfig.tsserver.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
 
-				vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "terraformls", "yamlls", "pyright" })
-			end)
-		end
-	end,
+    lspconfig.eslint.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end,
 }

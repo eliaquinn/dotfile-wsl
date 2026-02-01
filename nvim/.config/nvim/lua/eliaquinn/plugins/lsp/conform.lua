@@ -10,7 +10,6 @@ return {
 				typescript = { "prettier" },
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
-				-- svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
@@ -18,9 +17,8 @@ return {
 				markdown = { "prettier" },
 				-- graphql = { "prettier" },
 				-- liquid = { "prettier" },
-				-- lua = { "stylua" },
+				lua = { "stylua" },
 				python = { "isort", "black" },
-				php = { "phpcsfixer", "php" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
