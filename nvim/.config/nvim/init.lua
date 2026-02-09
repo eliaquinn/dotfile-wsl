@@ -1,23 +1,26 @@
 require("eliaquinn.core")
 require("eliaquinn.lazy")
 
--- local lspconfig = require("lspconfig")
---
--- lspconfig.tsserver.setup({
--- 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
--- })
+-- environments to connect db
+local ok, dbs = pcall(require, "local.dbs")
+
+if ok then
+  vim.g.dbs = dbs
+else
+  vim.g.dbs = vim.g.dbs or {}
+end
 
 -- Exibir notificações quando a gravação de macro começar e terminar, com o nome do registrador
 vim.api.nvim_create_autocmd("RecordingEnter", {
-	callback = function()
-		local register = vim.fn.reg_recording() -- Obter o registrador onde a macro está sendo gravada
-		vim.notify("Iniciando gravação de macro no registrador: " .. register, vim.log.levels.INFO)
-	end,
+  callback = function()
+    local register = vim.fn.reg_recording() -- Obter o registrador onde a macro está sendo gravada
+    vim.notify("Iniciando gravação de macro no registrador: " .. register, vim.log.levels.INFO)
+  end,
 })
 
 vim.api.nvim_create_autocmd("RecordingLeave", {
-	callback = function()
-		local register = vim.fn.reg_recording() -- Obter o registrador onde a macro foi gravada
-		vim.notify("Gravação de macro no registrador " .. register .. " concluída", vim.log.levels.INFO)
-	end,
+  callback = function()
+    local register = vim.fn.reg_recording() -- Obter o registrador onde a macro foi gravada
+    vim.notify("Gravação de macro no registrador " .. register .. " concluída", vim.log.levels.INFO)
+  end,
 })
