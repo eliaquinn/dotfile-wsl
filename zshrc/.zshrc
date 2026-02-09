@@ -110,3 +110,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH="/usr/bin:/usr/local/bin:$PATH"
 
 . "$HOME/.cargo/env"
+
+# opencode
+export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH

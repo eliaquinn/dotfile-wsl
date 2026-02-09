@@ -65,3 +65,6 @@ keymap.set("v", ">", ">gv", { desc = "Ident right" })
 
 -- Keep last yanked when pasting
 keymap.set("v", "p", '"_dP', { desc = "keep de last yanked when pasting" })
+
+-- DBUI Toggle
+keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
