@@ -25,7 +25,6 @@ keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice M
 
 -- View Noice message
 keymap.set("n", "<leader>nm", ":messages<CR>", { desc = "View noice messages" })
--- keymap.set("n", "<leader>nm", ":Noice<CR>", { desc = "View noice messages" })
 
 -- Mapeamentos básicos de LSP
 keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
@@ -35,6 +34,7 @@ keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "diagnostic prev " })
 keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "diagnostic next " })
 keymap.set("n", "<leader>D", vim.diagnostic.open_float, { desc = "Open Float Diagnostic" })
+keymap.set('n', 'fF', '<cmd>NvimTreeFindFile<CR>', { desc = 'Open nvim-tree and find file opened.' })
 
 -- Adicionando seus keybinds personalizados
 keymap.set("n", "<leader>ld", vim.lsp.buf.type_definition, { desc = "LSP: Type Definition" })
@@ -68,3 +68,7 @@ keymap.set("v", "p", '"_dP', { desc = "keep de last yanked when pasting" })
 
 -- DBUI Toggle
 keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
+
+-- Live server keys
+keymap.set('n', '<leader>ls', '<cmd>LiveServerStart<CR>', { desc = 'Start local server.' })
+keymap.set('n', '<leader>lp', '<cmd>LiveServerStop<CR>', { desc = 'Start local server.' })
