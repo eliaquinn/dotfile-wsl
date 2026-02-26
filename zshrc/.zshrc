@@ -113,3 +113,4 @@ export PATH="/usr/bin:/usr/local/bin:$PATH"
 
 # opencode
 export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH
+. "/home/eliaquin-araujo/.deno/env"
