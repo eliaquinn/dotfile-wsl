@@ -77,4 +77,4 @@ keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
 
 -- Live server keys
 keymap.set('n', '<leader>ls', '<cmd>LiveServerStart<CR>', { desc = 'Start local server.' })
-keymap.set('n', '<leader>lp', '<cmd>LiveServerStop<CR>', { desc = 'Start local server.' })
+keymap.set('n', '<leader>lp', '<cmd>LiveServerStop<CR>', { desc = 'Stop local server.' })
