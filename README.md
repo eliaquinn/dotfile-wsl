@@ -1,6 +1,3 @@
-Perfeito 👍
-Abaixo está a **documentação em Markdown (`.md`)**, organizada e pronta para uso em repositório (ex: `README.md` ou `docs/setup.md`).
-
 ---
 
 # 🛠️ Ambiente de Desenvolvimento
