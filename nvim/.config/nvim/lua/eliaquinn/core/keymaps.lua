@@ -1,7 +1,7 @@
--- set leader key to space
 vim.g.mapleader = " "
 
-local keymap = vim.keymap -- for conciseness
+local keymap = vim.keymap
+local utils = require("eliaquinn.config.utils")
 
 ---------------------
 -- General Keymaps -------------------
@@ -17,10 +17,11 @@ keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight
 keymap.set("n", "x", '"_x')
 
 -- git signs keymaps
-keymap.set("n", "<leader>gh", "<cmd>:Gitsigns preview_hunk<CR>", { desc = "Show changes made" })
-keymap.set("n", "<leader>gl", "<cmd>:Gitsigns preview_hunk_inline<CR>", { desc = "Show changes inline" })
-keymap.set("n", "<leader>gf", "<cmd>:Gitsigns setqflist<CR>", { desc = "Toggle to set the quickfix" })
-keymap.set("n", "<leader>gr", "<cmd>:Gitsigns reset_hunk<CR>", { desc = "Remove changes inline" })
+keymap.set("n", "<leader>hh", "<cmd>:Gitsigns preview_hunk<CR>", { desc = "Show changes made" })
+keymap.set("n", "<leader>hl", "<cmd>:Gitsigns preview_hunk_inline<CR>", { desc = "Show changes inline" })
+keymap.set("n", "<leader>hf", "<cmd>:Gitsigns setqflist<CR>", { desc = "Toggle to set the quickfix" })
+keymap.set("n", "<leader>hr", "<cmd>:Gitsigns reset_hunk<CR>", { desc = "Remove changes inline" })
+keymap.set("n", "<leader>hd", utils.show_last_commit_diff, { desc = "Show last commit diff" })
 
 -- center line on C-d
 keymap.set("n", "<C-d>", "<C-d>zz", { desc = "center the cursor" })
