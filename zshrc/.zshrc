@@ -114,3 +114,6 @@ export PATH="/usr/bin:/usr/local/bin:$PATH"
 # opencode
 export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH
 . "/home/eliaquin-araujo/.deno/env"
+
+# Created by `pipx` on 2026-03-04 16:30:07
+export PATH="$PATH:/home/eliaquin-araujo/.local/bin"
