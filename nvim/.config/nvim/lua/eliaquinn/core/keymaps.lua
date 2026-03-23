@@ -81,5 +81,5 @@ keymap.set('n', '<leader>ls', '<cmd>LiveServerStart<CR>', { desc = 'Start local 
 keymap.set('n', '<leader>lp', '<cmd>LiveServerStop<CR>', { desc = 'Stop local server.' })
 
 
-vim.keymap.set("n", "<leader>lt", '<cmd>set background=light<CR>', { desc = "Alternar para o tema light" })
-vim.keymap.set("n", "<leader>dt", '<cmd>set background=dark<CR>', { desc = "Alternar para o tema dark" })
+vim.keymap.set("n", "<leader>tl", '<cmd>set background=light<CR>', { desc = "Alternar para o tema light" })
+vim.keymap.set("n", "<leader>td", '<cmd>set background=dark<CR>', { desc = "Alternar para o tema dark" })
