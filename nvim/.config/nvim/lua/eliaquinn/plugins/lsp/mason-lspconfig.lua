@@ -19,6 +19,9 @@ return {
         "terraformls",
         "yamlls",
         "intelephense",
+        "vue_ls",
+        "cssls",
+        "tailwindcss"
       },
       automatic_installation = true,
     })
