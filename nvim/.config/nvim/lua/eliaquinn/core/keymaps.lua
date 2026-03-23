@@ -79,3 +79,7 @@ keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { desc = "Toggle DBUI" })
 -- Live server keys
 keymap.set('n', '<leader>ls', '<cmd>LiveServerStart<CR>', { desc = 'Start local server.' })
 keymap.set('n', '<leader>lp', '<cmd>LiveServerStop<CR>', { desc = 'Stop local server.' })
+
+
+vim.keymap.set("n", "<leader>lt", '<cmd>set background=light<CR>', { desc = "Alternar para o tema light" })
+vim.keymap.set("n", "<leader>dt", '<cmd>set background=dark<CR>', { desc = "Alternar para o tema dark" })
