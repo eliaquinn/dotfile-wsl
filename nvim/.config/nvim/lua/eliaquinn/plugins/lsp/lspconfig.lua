@@ -58,30 +58,50 @@ return {
         },
       }
 
-      -- ESLint LSP (diagnósticos + fix)
+      vim.lsp.config.vue_ls = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = { "vue", "vue-html" },
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
+          languageFeatures = {
+            references = true,
+            definition = true,
+            typeDefinition = true,
+            callHierarchy = true,
+            hover = true,
+            rename = true,
+            signatureHelp = true,
+            codeAction = true,
+            completion = {
+              defaultTagNameCase = "both",
+              defaultAttrNameCase = "kebabCase",
+            },
+          },
+        },
+      }
+
       vim.lsp.config.eslint = {
         capabilities = capabilities,
         on_attach = function(client, bufnr)
           on_attach(client, bufnr)
 
-          -- auto-fix ao salvar (se o server suportar)
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
             callback = function()
-              -- tenta aplicar "fix all" do eslint quando disponível
               pcall(vim.cmd, "EslintFixAll")
             end,
           })
         end,
       }
 
-      -- inicia aqui o lsp
-      vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls" })
+      vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls" })
 
       return
     end
 
-    -- Fallback para versões antigas (<0.11), se você quiser manter compatibilidade:
     local lspconfig = require("lspconfig")
 
     lspconfig.tsserver.setup({

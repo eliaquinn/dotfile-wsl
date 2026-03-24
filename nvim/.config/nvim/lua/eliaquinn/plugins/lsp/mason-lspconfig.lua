@@ -10,8 +10,6 @@ return {
         "bashls",
         "dockerls",
         "lua_ls",
-        -- "graphql",
-        -- "docker_compose_language_service",
         "tflint",
         "jsonls",
         "sqlls",

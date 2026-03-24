@@ -9,8 +9,8 @@ return {
       javascriptreact = { "eslint_d" },
       typescript = { "eslint_d" },
       typescriptreact = { "eslint_d" },
+      -- vue = { "eslint_d" },
       python = { "ruff" },
-      -- lua = { "selene" },
     }
 
     local grp = vim.api.nvim_create_augroup("linting", { clear = true })

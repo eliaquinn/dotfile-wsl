@@ -16,7 +16,7 @@ return {
         "json", "javascript", "typescript", "tsx", "yaml", "html", "css", "prisma",
         "markdown", "markdown_inline", "svelte", "graphql", "hcl", "helm", "toml", "regex",
         "bash", "lua", "python", "vim", "dockerfile", "gitignore", "query", "terraform",
-        "vimdoc", "c", "tmux", "vue"
+        "vimdoc", "c", "tmux", "vue", "vue_postcss", "scss"
       },
       auto_install = true,
       sync_install = false,
