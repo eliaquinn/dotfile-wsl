@@ -41,9 +41,13 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ##### Alias
 alias cls="clear"
+
+# nvim aliases
 alias vim=nvim
 alias v=vim
 alias vi=v
+alias code=nvim
+
 alias sb=supabase
 alias connect="basti connect $AWS_PROFILE"
 
@@ -111,9 +115,13 @@ export PATH="/usr/bin:/usr/local/bin:$PATH"
 
 . "$HOME/.cargo/env"
 
-# opencode
-export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH
 . "/home/eliaquin-araujo/.deno/env"
 
 # Created by `pipx` on 2026-03-04 16:30:07
 export PATH="$PATH:/home/eliaquin-araujo/.local/bin"
+export PATH="$HOME/.phpenv/bin:$PATH"
+eval "$(phpenv init -)"
+export PATH="/home/linuxbrew/.linuxbrew/opt/php/bin:$PATH"
+
+# opencode
+export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH
