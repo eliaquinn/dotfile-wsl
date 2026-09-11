@@ -12,7 +12,14 @@ export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '/mnt/c/' | tr '\n' ':');
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="jonathan"
+# ZSH_THEME="jonathan"
+# ZSH_THEME="darkblood"
+ZSH_THEME="fino"
+
+# custom theme zsh
+# ZSH_THEME="drofloh"
+# ZSH_CUSTOM=~/Documents/zsh-themes/custom
+
 plugins=(
 	git
 	zsh-syntax-highlighting
@@ -48,8 +55,8 @@ alias v=vim
 alias vi=v
 alias code=nvim
 
-alias sb=supabase
-alias connect="basti connect $AWS_PROFILE"
+# alias sb=supabase
+# alias connect="basti connect $AWS_PROFILE"
 
 # bat settings, lauch from path
 alias cat="~/.local/bin/bat"
@@ -125,3 +132,6 @@ export PATH="/home/linuxbrew/.linuxbrew/opt/php/bin:$PATH"
 
 # opencode
 export PATH=/home/eliaquin-araujo/.opencode/bin:$PATH
+
+# mimocode
+export PATH=/home/eliaquin-araujo/.mimocode/bin:$PATH

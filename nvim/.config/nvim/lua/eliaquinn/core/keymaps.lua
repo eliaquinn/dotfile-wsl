@@ -9,6 +9,10 @@ local utils = require("eliaquinn.config.utils")
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
+-- utilities nvim keys
+keymap.set("n", "<leader>wi", "<cmd>:echo expand('%:p')<CR>", { desc = "Show path file" })
+
+
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
