@@ -12,10 +12,10 @@ return {
     vim.diagnostic.config({
       signs = {
         text = {
-          [vim.diagnostic.severity.ERROR] = "",
-          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
           [vim.diagnostic.severity.HINT] = "󰰀",
-          [vim.diagnostic.severity.INFO] = "",
+          [vim.diagnostic.severity.INFO] = "",
         },
       },
     })
@@ -29,89 +29,72 @@ return {
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     end
 
-    if vim.fn.has("nvim-0.11") == 1 then
-      vim.lsp.config.ts_ls = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
+    -- Path do Vue Language Server instalado pelo Mason
+    local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server/node_modules/@vue/language-server'
 
-      vim.lsp.config.pyright = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      }
-
-      vim.lsp.config.lua_ls = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-              checkThirdParty = false,
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = { enable = false },
-          },
-        },
-      }
-
-      vim.lsp.config.vue_ls = {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "vue", "vue-html" },
-        init_options = {
-          vue = {
-            hybridMode = true,
-          },
-          languageFeatures = {
-            references = true,
-            definition = true,
-            typeDefinition = true,
-            callHierarchy = true,
-            hover = true,
-            rename = true,
-            signatureHelp = true,
-            codeAction = true,
-            completion = {
-              defaultTagNameCase = "both",
-              defaultAttrNameCase = "kebabCase",
-            },
-          },
-        },
-      }
-
-      vim.lsp.config.eslint = {
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-              pcall(vim.cmd, "EslintFixAll")
-            end,
-          })
-        end,
-      }
-
-      vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls" })
-
-      return
-    end
-
-    local lspconfig = require("lspconfig")
-
-    lspconfig.tsserver.setup({
+    -- Configuração do TypeScript com suporte a Vue
+    vim.lsp.config.ts_ls = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+      init_options = {
+        plugins = {
+          {
+            name = '@vue/typescript-plugin',
+            location = vue_language_server_path,
+            languages = { 'vue' },
+          },
+        },
+      },
+      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    }
 
-    lspconfig.eslint.setup({
+    -- Configuração do Vue Language Server
+    vim.lsp.config.vue_ls = {
       capabilities = capabilities,
       on_attach = on_attach,
-    })
+    }
+
+    -- Configuração do Pyright
+    vim.lsp.config.pyright = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+
+    -- Configuração do Lua LS
+    vim.lsp.config.lua_ls = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          completion = {
+            callSnippet = "Replace",
+          },
+          diagnostics = { globals = { "vim" } },
+          workspace = {
+            checkThirdParty = false,
+            library = vim.api.nvim_get_runtime_file("", true),
+          },
+          telemetry = { enable = false },
+        },
+      },
+    }
+
+    -- Configuração do ESLint
+    vim.lsp.config.eslint = {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          callback = function()
+            pcall(vim.cmd, "EslintFixAll")
+          end,
+        })
+      end,
+    }
+
+    -- Habilitar todos os LSPs
+    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls" })
   end,
 }

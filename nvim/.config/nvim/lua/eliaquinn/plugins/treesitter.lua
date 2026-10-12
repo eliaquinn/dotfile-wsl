@@ -18,7 +18,7 @@ return {
       "json", "javascript", "typescript", "tsx", "yaml", "html", "css", "prisma",
       "markdown", "markdown_inline", "svelte", "graphql", "hcl", "helm", "toml", "regex",
       "bash", "lua", "python", "vim", "dockerfile", "gitignore", "query", "terraform",
-      "vimdoc", "c", "vue", "scss"
+      "vimdoc", "c", "vue", "scss", "php"
     }
 
     require("nvim-treesitter").install(parsers)
