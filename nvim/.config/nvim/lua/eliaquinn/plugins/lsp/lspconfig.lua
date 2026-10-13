@@ -179,7 +179,20 @@ return {
       },
     }
 
+    -- Configuração do Prisma Language Server
+    vim.lsp.config.prismals = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        prisma = {
+          prismaFmt = {
+            indentSize = 2,
+          },
+        },
+      },
+    }
+
     -- Habilitar todos os LSPs
-    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls", "intelephense" })
+    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls", "intelephense", "prismals" })
   end,
 }

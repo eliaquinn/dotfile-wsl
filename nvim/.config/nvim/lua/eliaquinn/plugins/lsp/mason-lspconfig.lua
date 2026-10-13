@@ -20,6 +20,7 @@ return {
         "vue_ls",
         "cssls",
         "tailwindcss",
+        "prismals",
         -- "phpcbf" -- PHP Code Beautifier and Fixer
       },
       automatic_installation = true,
