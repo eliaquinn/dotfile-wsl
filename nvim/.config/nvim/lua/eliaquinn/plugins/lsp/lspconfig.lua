@@ -30,7 +30,8 @@ return {
     end
 
     -- Path do Vue Language Server instalado pelo Mason
-    local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server/node_modules/@vue/language-server'
+    local vue_language_server_path = vim.fn.expand('$MASON/packages') ..
+    '/vue-language-server/node_modules/@vue/language-server'
 
     -- Configuração do TypeScript com suporte a Vue
     vim.lsp.config.ts_ls = {
@@ -94,7 +95,91 @@ return {
       end,
     }
 
+    -- Configuração do Intelephense (PHP)
+    vim.lsp.config.intelephense = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        intelephense = {
+          files = {
+            maxSize = 5000000, -- 5MB - para projetos PHP maiores
+          },
+          stubs = {
+            "apache2",
+            "bcmath",
+            "bz2",
+            "calendar",
+            "com_dotnet",
+            "Core",
+            "ctype",
+            "curl",
+            "date",
+            "dba",
+            "dom",
+            "enchant",
+            "exif",
+            "fileinfo",
+            "filter",
+            "fpm",
+            "ftp",
+            "gd",
+            "hash",
+            "iconv",
+            "imap",
+            "influxdb",
+            "intl",
+            "json",
+            "ldap",
+            "libxml",
+            "mbstring",
+            "mcrypt",
+            "memcached",
+            "mysqli",
+            "oci8",
+            "odbc",
+            "openssl",
+            "pcntl",
+            "pcre",
+            "pdo",
+            "pgsql",
+            "posix",
+            "pspell",
+            "readline",
+            "recode",
+            "redis",
+            "Reflection",
+            "session",
+            "shmop",
+            "SimpleXML",
+            "snmp",
+            "soap",
+            "sockets",
+            "sodium",
+            "SPL",
+            "standard",
+            "superglobals",
+            "sysvmsg",
+            "sysvsem",
+            "sysvshm",
+            "tidy",
+            "tokenizer",
+            "xml",
+            "xmlreader",
+            "xmlrpc",
+            "xmlwriter",
+            "xsl",
+            "zlib",
+            "wordpress",
+            "phpunit",
+          },
+          diagnostics = {
+            enable = true,
+          },
+        },
+      },
+    }
+
     -- Habilitar todos os LSPs
-    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls" })
+    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls", "intelephense" })
   end,
 }

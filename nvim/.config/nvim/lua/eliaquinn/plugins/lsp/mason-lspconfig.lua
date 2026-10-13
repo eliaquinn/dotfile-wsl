@@ -19,7 +19,8 @@ return {
         "intelephense",
         "vue_ls",
         "cssls",
-        "tailwindcss"
+        "tailwindcss",
+        -- "phpcbf" -- PHP Code Beautifier and Fixer
       },
       automatic_installation = true,
     })

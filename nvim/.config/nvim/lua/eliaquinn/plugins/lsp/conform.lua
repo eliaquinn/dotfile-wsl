@@ -19,6 +19,7 @@ return {
         python = { "isort", "black" },
         vue = { "prettier" },
         vuehtml = { "prettier" },
+        -- php = { "phpcbf" }, -- PHP Code Beautifier and Fixer
       },
       format_on_save = {
         lsp_fallback = true,

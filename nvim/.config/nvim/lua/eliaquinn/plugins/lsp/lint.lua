@@ -11,6 +11,7 @@ return {
       typescriptreact = { "eslint_d" },
       vue = { "eslint_d" },
       python = { "ruff" },
+      php = { "php" }, -- PHP syntax check
     }
 
     local grp = vim.api.nvim_create_augroup("linting", { clear = true })
