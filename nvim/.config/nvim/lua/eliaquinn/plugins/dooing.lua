@@ -2,7 +2,31 @@ return {
   "atiladefreitas/dooing",
   config = function()
     require("dooing").setup({
-      ui = { style = "modern", tree_connectors = false },
+      save_path = vim.fn.stdpath("data") .. "/dooing_todos.json",
+      pretty_print_json = false, -- Pretty-print JSON output (requires jq or python)
+      timestamp = {
+        enabled = true,          -- Show relative timestamps (e.g., @5m ago, @2h ago)
+      },
+
+      ui = {
+        style = "modern",
+        sections = true,        -- group top-level todos under status headings
+        priority_bar = true,    -- colored marker instead of coloring the whole row
+        tree_connectors = true, -- draw ├─ / └─ / │ guides for nested tasks
+        note_preview = true,    -- first line of a todo's notes, dimmed, beneath it
+        progress = true,
+        section_titles = {
+          in_progress = "Em Progresso",
+          pending = "Pendente",
+          done = "Concluída",
+        },
+        icons = {
+          priority_bar = "▎",
+          overdue = "󰀦",
+          progress_on = "▰",
+          progress_off = "▱",
+        },
+      },
       window = {
         dimensions = function()
           return {
@@ -11,16 +35,27 @@ return {
           }
         end,
       },
+      formatting = {
+        pending = {
+          icon = "○",
+          format = { "icon", "notes_icon", "text", "due_date", "ect" },
+        },
+        in_progress = {
+          icon = "◐",
+          format = { "icon", "text", "due_date", "ect" },
+        },
+        done = {
+          icon = "✓",
+          format = { "icon", "notes_icon", "text", "due_date", "ect" },
+        },
+      },
       per_project = {
-        enabled = true,               -- Enable/disable per-project todos
-        default_filename = "dooing.json", -- Default filename for new project todo files
-        auto_gitignore = false,       -- Automatically add to .gitignore
-        -- Set to true for auto-add, "prompt" to ask, false to skip
-        on_missing = "prompt",        -- What to do when project todo file doesn't exist
-        -- "prompt" = ask user, "auto_create" = create automatically
-        auto_open_project_todos = false, -- Auto-open project todos on startup if they exist
-        -- Opens window automatically when entering a git project with todos
-      }
+        enabled = true,                   -- Enable per-project todos
+        default_filename = "dooing.json", -- Default filename for project todos
+        auto_gitignore = false,           -- Auto-add to .gitignore (true/false/"prompt")
+        on_missing = "prompt",            -- What to do when file missing ("prompt"/"auto_create")
+        auto_open_project_todos = false,  -- Auto-open project todos on startup if they exist
+      },
     })
 
     vim.api.nvim_set_hl(0, "DooingSectionTitle", { fg = "#89b4fa", bold = true })
