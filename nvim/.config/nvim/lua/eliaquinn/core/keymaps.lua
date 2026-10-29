@@ -9,6 +9,12 @@ local utils = require("eliaquinn.config.utils")
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
+-- Dooing todo list
+keymap.set("n", "<leader>dl", "<cmd>:DooingLocal<CR>",
+  { desc = "Opens the project-specific todo window (git repositories only)" })
+keymap.set("n", "<leader>dg", "<cmd>:Dooing<CR>",
+  { desc = "Opens the global todo window" })
+
 -- utilities nvim keys
 keymap.set("n", "<leader>wi", "<cmd>:echo expand('%:p')<CR>", { desc = "Show path file" })
 
