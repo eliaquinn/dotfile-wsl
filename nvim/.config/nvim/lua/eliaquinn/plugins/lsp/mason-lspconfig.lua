@@ -21,6 +21,8 @@ return {
         "cssls",
         "tailwindcss",
         "prismals",
+        "rust_analyzer",
+        "taplo",
         -- "phpcbf" -- PHP Code Beautifier and Fixer
       },
       automatic_installation = true,

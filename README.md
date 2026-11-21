@@ -128,6 +128,19 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+Componentes usados pelo Neovim (formatação com `rustfmt` e lint com `clippy`):
+
+```bash
+rustup component add rustfmt clippy
+```
+
+> O LSP **rust-analyzer** e o formatador **taplo** (TOML) são instalados
+> automaticamente pelo Mason. Para instalar manualmente: `:MasonInstall rust-analyzer taplo`.
+>
+> O `rust-analyzer` do Mason é usado em vez do componente do rustup para evitar
+> binários duplicados. O servidor de proc-macros (`rust-analyzer-proc-macro-srv`),
+> necessário para macros como `serde`, vem com o componente `rustc`.
+
 ---
 
 ## 📝 Neovim

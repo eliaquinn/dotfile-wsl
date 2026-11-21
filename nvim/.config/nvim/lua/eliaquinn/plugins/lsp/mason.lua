@@ -1,5 +1,5 @@
 return {
-	"william/mason.nvim",
+	"williamboman/mason.nvim",
 	build = ":MasonUpdate",
 	config = true
 }

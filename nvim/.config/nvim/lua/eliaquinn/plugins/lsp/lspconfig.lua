@@ -192,7 +192,37 @@ return {
       },
     }
 
+    -- Configuração do Rust (rust-analyzer)
+    vim.lsp.config.rust_analyzer = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        ["rust-analyzer"] = {
+          cargo = {
+            allFeatures = true,
+          },
+          procMacro = {
+            enable = true,
+          },
+          check = {
+            -- O `cargo check` padrão continua responsável pelos erros de
+            -- compilação; os lints do clippy são executados pelo nvim-lint.
+            allTargets = true,
+          },
+        },
+      },
+    }
+
     -- Habilitar todos os LSPs
-    vim.lsp.enable({ "ts_ls", "eslint", "pyright", "lua_ls", "vue_ls", "intelephense", "prismals" })
+    vim.lsp.enable({
+      "ts_ls",
+      "eslint",
+      "pyright",
+      "lua_ls",
+      "vue_ls",
+      "intelephense",
+      "prismals",
+      "rust_analyzer",
+    })
   end,
 }

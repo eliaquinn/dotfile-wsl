@@ -17,6 +17,8 @@ return {
         markdown = { "prettier" },
         lua = { "stylua" },
         python = { "isort", "black" },
+        rust = { "rustfmt" },
+        toml = { "taplo" },
         vue = { "prettier" },
         vuehtml = { "prettier" },
         -- php = { "phpcbf" }, -- PHP Code Beautifier and Fixer

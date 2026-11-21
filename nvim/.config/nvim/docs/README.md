@@ -24,6 +24,9 @@ nvim/.config/nvim/
 │   ├── core/             # Configurações core (keymaps, options, api)
 │   ├── plugins/           # Plugins individuais
 │   │   ├── treesitter.lua
+│   │   ├── rust.lua       # Setup do toolchain Rust (PATH e atalhos)
+│   │   ├── rust/
+│   │   │   └── keymaps.lua
 │   │   └── lsp/
 │   │       ├── lspconfig.lua
 │   │       ├── mason-lspconfig.lua
@@ -49,10 +52,30 @@ O parser do Prisma requer configuração especial. Veja [TREESITTER_PRISMA.md](.
 - `vue_ls` - Vue
 - `intelephense` - PHP
 - `prismals` - Prisma
+- `rust_analyzer` - Rust
 - `jsonls` - JSON
 - `yamlls` - YAML
 - `terraformls` - Terraform
 - `sqlls` - SQL
+
+## Rust
+
+O suporte ao Rust é dividido entre LSP, formatação, lint e atalhos:
+
+- **LSP**: `rust_analyzer` (instalado pelo Mason), com `cargo check` para erros
+  de compilação e o `clippy` executado pelo `nvim-lint` para os lints do clippy.
+- **Formatter**: `rustfmt` (via `conform.nvim`) e `taplo` para arquivos TOML.
+- **Linter**: `clippy` (`cargo clippy`), executado ao salvar o arquivo.
+- **Atalhos** (buffer local, em arquivos Rust):
+
+| Atalho | Ação |
+| --- | --- |
+| `<leader>rt` | Executa o teste sob o cursor (`experimental/runnables` do rust-analyzer) |
+| `<leader>rm` | Expande a macro sob o cursor (`rust-analyzer/expandMacro`) |
+
+> O `rustup` guarda os binários em `~/.cargo/bin`, que não está no PATH do
+> Neovim quando ele é iniciado fora de um shell interativo. O plugin
+> `plugins/rust.lua` adiciona esse diretório ao PATH durante a inicialização.
 
 ## Comandos Úteis
 

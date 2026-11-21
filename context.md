@@ -50,6 +50,9 @@ This document provides a comprehensive overview of the dotfiles project, focusin
 │   │       │       │   │   ├── lspconfig.lua
 │   │       │       │   │   ├── mason-lspconfig.lua
 │   │       │       │   │   ├── mason.lua
+│   │       │       │   ├── rust.lua
+│   │       │       │   ├── rust
+│   │       │       │   │   ├── keymaps.lua
 │   │       │       │   ├── autopairs.lua
 │   │       │       │   ├── bufferline.lua
 │   │       │       │   ├── dadbobui.lua
@@ -120,6 +123,7 @@ Quando sugerir configurações Neovim:
 - **Python**: LSP (pyright), Formatter (black), Linter (ruff)
 - **Lua**: LSP (lua_ls), Formatter (stylua)
 - **JSON**: LSP (jsonls)
+- **Rust**: LSP (rust-analyzer), Formatter (rustfmt), Linter (clippy)
 
 ## Enhancements for AI Tool Utilization
 
